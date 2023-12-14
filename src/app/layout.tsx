@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import Header from '@/components/navbar/Header'
 
 export const metadata: Metadata = {
   title: 'Airbnb',
@@ -13,7 +14,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        {/* header */}
+        <Header />
+
+        {children}
+      </body>
     </html>
   )
 }
