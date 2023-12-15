@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react'
+import React, { Dispatch, SetStateAction, useState } from 'react'
 import SearchItemWrapper from './SearchItemWrapper'
 import SearchItemLabel from './SearchItemLabel'
 import SearchItemText from './SearchItemText'
@@ -86,8 +86,30 @@ function Search() {
         setBigSearchItem(item);
     }
 
-    function onSubmit() {
+    function onSubmit(values: z.infer<typeof formSchema>) {
+        console.log(values);
 
+        // checkin
+        const checkin_monthday = values.checkin.getDate().toString();
+        const checkin_month = values.checkin.getMonth().toString();
+        const checkin_year = values.checkin.getFullYear().toString();
+
+        // check out
+        const checkout_monthday = values.checkout.getDate().toString();
+        const checkout_month = values.checkout.getMonth().toString();
+        const checkout_year = values.checkout.getFullYear().toString();
+
+        const checkin = `${checkin_year}-${checkin_month}-${checkin_monthday}`;
+        const checkout = `${checkout_year}-${checkout_month}-${checkout_monthday}`;
+
+        const url = new URL("https://www.airbnb.com/s/" + values.destination + "/homes?tab_id=home_tab&refinement_paths%5B%5D=%2Fhomes&flexible_trip_lengths%5B%5D=one_week&monthly_start_date=2024-01-01&monthly_length=3&price_filter_input_type=0&channel=EXPLORE&date_picker_type=calendar&");
+        url.searchParams.set("checkin", checkin);
+        url.searchParams.set("checkout", checkout);
+        url.searchParams.set("adults", values.adults);
+        url.searchParams.set("children", values.children);
+        url.searchParams.set("infants", values.infants);
+
+        router.push(`/search?url=${url.href}`);
     }
 
     return (
@@ -206,7 +228,7 @@ function Search() {
                                                                     <div className='flex items-center justify-center opacity-60 cursor-pointer hover:opacity-100'>
                                                                         <FaPlus className='h-7 w-7 p-1 rounded-full border border-neutral-500' />
                                                                     </div>
-                                                                    <p className='font-medium'>0</p>
+                                                                    <Input type='number' {...field} className={cn("border-none focus-visible:ring-transparent w-14")} />
                                                                     <div className='flex items-center justify-center opacity-60 cursor-pointer hover:opacity-100'>
                                                                         <FaMinus className="h-7 w-7 p-1 rounded-full border border-neutral-500" />
                                                                     </div>
@@ -214,7 +236,7 @@ function Search() {
                                                             </FormControl>
                                                         </FormItem>
                                                     )} />
-                                                    
+
                                                     {/* Children */}
                                                     <FormField control={form.control} name="children" render={({ field }) => (
                                                         <FormItem className='flex items-center justify-between py-5 border-b border-gray-300'>
@@ -229,7 +251,7 @@ function Search() {
                                                                     <div className='flex items-center justify-center opacity-60 cursor-pointer hover:opacity-100'>
                                                                         <FaPlus className='h-7 w-7 p-1 rounded-full border border-neutral-500' />
                                                                     </div>
-                                                                    <p className='font-medium'>0</p>
+                                                                    <Input type='number' {...field} className={cn("border-none focus-visible:ring-transparent w-14")} />
                                                                     <div className='flex items-center justify-center opacity-60 cursor-pointer hover:opacity-100'>
                                                                         <FaMinus className="h-7 w-7 p-1 rounded-full border border-neutral-500" />
                                                                     </div>
@@ -252,7 +274,7 @@ function Search() {
                                                                     <div className='flex items-center justify-center opacity-60 cursor-pointer hover:opacity-100'>
                                                                         <FaPlus className='h-7 w-7 p-1 rounded-full border border-neutral-500' />
                                                                     </div>
-                                                                    <p className='font-medium'>0</p>
+                                                                    <Input type='number' {...field} className={cn("border-none focus-visible:ring-transparent w-14")} />
                                                                     <div className='flex items-center justify-center opacity-60 cursor-pointer hover:opacity-100'>
                                                                         <FaMinus className="h-7 w-7 p-1 rounded-full border border-neutral-500" />
                                                                     </div>
@@ -275,7 +297,7 @@ function Search() {
                                                                     <div className='flex items-center justify-center opacity-60 cursor-pointer hover:opacity-100'>
                                                                         <FaPlus className='h-7 w-7 p-1 rounded-full border border-neutral-500' />
                                                                     </div>
-                                                                    <p className='font-medium'>0</p>
+                                                                    <Input type='number' {...field} className={cn("border-none focus-visible:ring-transparent w-14")} />
                                                                     <div className='flex items-center justify-center opacity-60 cursor-pointer hover:opacity-100'>
                                                                         <FaMinus className="h-7 w-7 p-1 rounded-full border border-neutral-500" />
                                                                     </div>
@@ -288,10 +310,10 @@ function Search() {
                                         </Popover>
                                     </div>
 
-                                    <div className='flex items-center bg-red-500 rounded-full text-white font-bold hover:bg-red-600'>
+                                    <Button type='submit' className='flex h-12 items-center bg-red-500 rounded-full text-white font-bold hover:bg-red-600'>
                                         <BiSearch className='w-11 h-11 p-3 rounded-full' />
                                         <p className='pr-8'>Search</p>
-                                    </div>
+                                    </Button>
                                 </div>
                             </SearchItemWrapper>
                         </div>
