@@ -1,4 +1,6 @@
-import React from 'react'
+'use client';
+
+import React, { useState } from 'react'
 
 // import icons
 import { TbBeach, TbMountain, TbPool } from 'react-icons/tb';
@@ -97,6 +99,7 @@ export const categories = [
 ]
 
 function Categories() {
+    const [option, setOption] = useState("Beach");
     return (
         <div className='max-w-[2520px] mx-auto xl:px-20 md:px-10 sm:px-2 px-4'>
             <div className='pt-4 flex flex-row items-center justify-between overflow-x-auto'>
@@ -105,6 +108,8 @@ function Categories() {
                         key={item.label}
                         label={item.label}
                         Icon={item.icon}
+                        selected={option===item.label}
+                        setOption={setOption}
                     />
                 ))}
             </div>
