@@ -23,7 +23,7 @@ function Header() {
                     <TopTabs showBigSearch={showBigSearch} />
                     <UserMenu />
                 </div>
-                {showBigSearch ? <Search/> : null}
+                {showBigSearch ? <Search setShowBigSearch={setShowBigSearch}/> : null}
             </header>
 
             {/* When user click outside, the search bar will be closed */}

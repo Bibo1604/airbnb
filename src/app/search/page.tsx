@@ -30,9 +30,6 @@ async function SearchPage({ searchParams }: Props) {
         )
     }
 
-    console.log(results.content.total_listings);
-
-
     return (
         <section>
             <div className='max-w-[2520px] mx-auto xl:px-20 md:px-10 sm:px-2 px-4'>

@@ -43,30 +43,7 @@ export const formSchema = z.object({
     pets: z.string().min(0).max(5),
 });
 
-const addGuestsOptions = [
-    {
-        title: "Adults",
-        text: "Ages 13 or above",
-        label: "adults",
-    },
-    {
-        title: "Children",
-        text: "Ages 2-12",
-        label: "children",
-    },
-    {
-        title: "Infants",
-        text: "Under 2",
-        label: "infants",
-    },
-    {
-        title: "Pets",
-        text: "",
-        label: "pets",
-    },
-]
-
-function Search() {
+function Search({ setShowBigSearch }: { setShowBigSearch: Dispatch<SetStateAction<boolean>> }) {
     const [bigSearchItem, setBigSearchItem] = useState("destination");
     const router = useRouter();
     const form = useForm<z.infer<typeof formSchema>>({
@@ -88,6 +65,7 @@ function Search() {
 
     function onSubmit(values: z.infer<typeof formSchema>) {
         console.log(values);
+        setShowBigSearch(false);
 
         // checkin
         const checkin_monthday = values.checkin.getDate().toString();
