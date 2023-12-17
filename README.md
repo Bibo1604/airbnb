@@ -4,7 +4,7 @@
 
 
 
-## Prerequisites
+## Development
 
 ### Cloning the repository
 
