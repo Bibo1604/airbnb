@@ -1,5 +1,8 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+![image](https://github.com/Bibo1604/airbnb/assets/74847239/60b9d2a5-b28b-45cb-bd71-c7fd6222272e)
+
+
 ## Getting Started
 
 First, run the development server:
