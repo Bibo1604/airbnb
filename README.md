@@ -12,8 +12,6 @@
 git clone https://github.com/Bibo1604/airbnb.git
 ```
 
-```
-
 ### Setup local environment file .env.local
 
 ```js
